@@ -18,6 +18,7 @@ jobs:
       actions: read
     steps:
       - name: Download and Extract Artifacts
+        # TODO repace with native actions/download-artifact once it supports downloading from another workflow: https://github.com/actions/download-artifact/issues/3
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: |
