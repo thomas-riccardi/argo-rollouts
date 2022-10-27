@@ -9,6 +9,7 @@ on:
     branches:
       - 'master'
       - 'release-*'
+      - 'dev-ci-e2e-multi-k8s-versions'
   workflow_dispatch:
     inputs:
       debug_enabled:

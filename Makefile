@@ -217,8 +217,10 @@ start-e2e:
 	go run ./cmd/rollouts-controller/main.go --instance-id ${E2E_INSTANCE_ID} --loglevel debug --kloglevel 6
 
 .PHONY: test-e2e
-test-e2e: install-devtools-local
-	${DIST_DIR}/gotestsum --rerun-fails-report=rerunreport.txt --junitfile=junit.xml --format=testname --packages="./test/e2e" --rerun-fails=5 -- -timeout 60m -count 1 --tags e2e -p ${E2E_PARALLEL} -parallel ${E2E_PARALLEL} -v --short ./test/e2e ${E2E_TEST_OPTIONS}
+test-e2e: #install-devtools-local
+	# fake result for quick test
+	echo '<?xml version="1.0" encoding="UTF-8"?><testsuites id="20140612_170519" name="Nouvelle_configuration (14/06/12 17:05:19)" tests="225" failures="1262" time="0.001">      <testsuite id="codereview.cobol.analysisProvider" name="Revue de code COBOL" tests="45" failures="17" time="0.001">         <testcase id="codereview.cobol.rules.ProgramIdRule" name="Utilisez un nom de programme correspondant au nom du fichier source" time="0.001">            <failure message="PROGRAM.cbl:2 Utilisez un nom de programme correspondant au nom du fichier source" type="WARNING">AVERTISSEMENT : Utilisez un nom de programme correspondant au nom du fichier sourceCatégorie : Revue de code COBOL – Conventions de dénomination Fichier : /project/PROGRAM.cbl Ligne: 2      </failure>    </testcase>  </testsuite></testsuites>' > junit.xml
+	# ${DIST_DIR}/gotestsum --rerun-fails-report=rerunreport.txt --junitfile=junit.xml --format=testname --packages="./test/e2e" --rerun-fails=5 -- -timeout 60m -count 1 --tags e2e -p ${E2E_PARALLEL} -parallel ${E2E_PARALLEL} -v --short ./test/e2e ${E2E_TEST_OPTIONS}
 
 .PHONY: test-unit
  test-unit: install-devtools-local
